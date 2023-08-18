@@ -51,20 +51,20 @@ _Explica como ejecutar las pruebas automatizadas para este sistema_
 
 -->
 
-## Autores
+### Autores
 
 **Ing. Emanuel R. Schumacher**. Personal de Apoyo. Instituto de Ambiente, Hábitat y Energía (INAHE), CONICET, Mendoza, Argentina. Enlaces de interés: [CONICET](https://www.conicet.gov.ar/new_scp/detalle.php?id=57001&keywords=Emanuel%2BSchumacher&datos_academicos=yes)
 
 **Dr. Juan Manuel Monteoliva**. Investigador Asistente. Instituto de Ambiente, Hábitat y Energía (INAHE), CONICET, Mendoza, Argentina. Enlaces de interés: [CONICET](https://www.conicet.gov.ar/new_scp/detalle.php?id=33083&datos_academicos=yes) - [ResearchGate](https://www.researchgate.net/profile/Juan-Manuel-Monteoliva).
 
-## Financiamiento
+### Financiamiento
 
 Esta investigación fue apoyada por el Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET, Argentina) - **PIBAA 2872021010-0031CO** y la Agencia Nacional de Investigaciones Científicas y Tecnológicas Promoción (ANPCyT, Argentina) - **PICT 2019-04356**. La fuente de financiación no participó en el diseño de este estudio; en la recopilación, análisis e interpretación de datos; en la redacción del informe; o en la decisión de someter 
 
-## Citación
+### Citación
 
-- Monteoliva, J.M, Schumacher, E.R. (2023, 7 de septiembre)_. Herramienta de código abierto para el pos-procesamiento de métricas dinámicas y visualización de resultados a partir de datos originales de simulaciones anuales_ [Congreso]. LUZ 2023 - XVI Jornadas Argentinas de Luminotecnia, Santiago del Estero, Argentina.
+Monteoliva, J.M, Schumacher, E.R. (2023, 7 de septiembre)_. Herramienta de código abierto para el pos-procesamiento de métricas dinámicas y visualización de resultados a partir de datos originales de simulaciones anuales_ [Congreso]. LUZ 2023 - XVI Jornadas Argentinas de Luminotecnia, Santiago del Estero, Argentina.
 
-## Licencia
+### Licencia
 
 MIT License  https://opensource.org/license/mit/
