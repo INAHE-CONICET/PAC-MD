@@ -1,4 +1,4 @@
-## PAC-MD (beta_stable_0.7) ![Badge en Desarollo](https://img.shields.io/badge/VERSION-0.7%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-BETA_ESTABLE%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-mpl-2.0%20-red) 
+## PAC-MD (beta_stable_0.7) ![Badge en Desarollo](https://img.shields.io/badge/VERSION-0.7%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-BETA_ESTABLE%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-MPL2.0%20-red) 
 
 
 _Es una herramienta de post-procesamiento de archivos de salida de simulaciones dinámicas obtenidas en motores cálculos avanzados de luz natural (Radiance). Las métricas dinámicas incorporadas a esta herramienta son: DA, sDA, UDI, sUDI y sCDI._
