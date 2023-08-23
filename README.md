@@ -11,44 +11,29 @@ Python 3.9-3.11
 Numpy 1.22.4
 Pandas 1.5.0
 Matplotlib 3.6.0
+Visual Studio Code
 ```
+Las versiones indicadas son las mínimas requeridas, pero se pueden utilizar las versiones más recientes tanto de Python como de las librerías.
 
 ### Instalación
 
+Para instalar Python dirijase al siguiente link (https://www.python.org/downloads/). Descargue la versión correspondiente para su sistema operativo, ejecute el instalador y siga los pasos indicados.
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+Una vez instalado Python, proceda a intalar las librerías mencionadas anteriormente de la siguiente manera:
 
-
-_Dí cómo será ese paso_
-
-
-```
-
-Da un ejemplo
+Abra una Terminal y ejecute la siguiente línea:
 
 ```
-
-
-_Y repite_
-  
-
+$ pip install matplotlib numpy pandas
 ```
+Si se le consulta confirmación para continuar con la instalación de alguna de las librerías indicadas, favor de indicar que "SI".
 
-hasta finalizar
+Para instalar Visual Studio Code, dirijase al siguiente link (https://code.visualstudio.com/Download)
 
-```
-  
+Descargue la versión correspondiente para su sistema operativo, ejecute el instalador y siga los pasos indicados.
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-  
-<!--
-## Ejecutar el ejemplo [./Example]
+Ya está listo para correr la aplicación PAC-MD!!!
 
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-
--->
 
 ### Autores
 
