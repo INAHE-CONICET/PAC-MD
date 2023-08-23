@@ -1,4 +1,4 @@
-## PAC-MD (beta_stable_0.7) ![Badge en Desarollo](https://img.shields.io/badge/VERSION-0.7%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-BETA_ESTABLE%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-mpl2.0%20-red) 
+## PAC-MD (beta_stable_0.7) ![Badge en Desarollo](https://img.shields.io/badge/VERSION-0.7%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-beta_estable%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-mpl2.0%20-red) 
 
 
 _Es una herramienta de post-procesamiento de archivos de salida de simulaciones dinámicas obtenidas en motores cálculos avanzados de luz natural (Radiance). Las métricas dinámicas incorporadas a esta herramienta son: DA, sDA, UDI, sUDI y sCDI._
@@ -11,7 +11,6 @@ Python 3.9-3.11
 Numpy 1.22.4
 Pandas 1.5.0
 Matplotlib 3.6.0
-Glob -----
 ```
 
 ### Instalación
@@ -67,4 +66,4 @@ Monteoliva, J.M, Schumacher, E.R. (2023, 7 de septiembre)_. Herramienta de cód
 
 ### Licencia
 
-MIT License  https://opensource.org/license/mit/
+Mozilla 2.0  	https://www.mozilla.org/en-US/MPL/2.0/
