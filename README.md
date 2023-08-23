@@ -6,7 +6,7 @@ _Es una herramienta de post-procesamiento de archivos de salida de simulaciones 
 ### Requisitos
 
 ```
-Mac OS or Linux operating system:
+Windows or Mac OS or Linux operating system:
 Python 3.9-3.11
 Numpy 1.22.4
 Pandas 1.5.0
