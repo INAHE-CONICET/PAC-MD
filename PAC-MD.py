@@ -153,11 +153,10 @@ def split_filenames(lista):
 
     Parámetros output
         listaCompleta - Elemento tipo lista, la cual contiene los identificadores de los archivos a analizar.
-        rDict
-        sDict
-        sIndex
-
-    split_filenames(lista)
+        rDict - Elemento tipo Diccionario, { "parentID": [id1, id2, ...], "childID" :[resultID1, resultID2, ...]}, contiene los índices de los archivos results
+        sDict - Elemento tipo Diccionario, { "parentID": [id1, id2, ...], "childID" :[scheduleID1, scheduleID2, ...]}, contiene los índices de los archivos schedule
+        sIndex - Elemento tipo Diccionario, { "parentID1": [lista de schedulesID asociados al parentID1], "parentID2": [lista de schedulesID asociados al parentID2], ...} 
+        
     '''
     resultados = lista["resultados"]
     schedules = lista["schedules"]
@@ -207,16 +206,16 @@ def count_ocurrencies(lista, indice):
     '''
     - CALCULO DE OCURRENCIA DE APELLIDOS
 
-    Recorre una lista cuyos elementos son un diccionario con el formato {"apellido": AAA, "nombre": NNN}, 
-    luego con el parametro indice = "apellido" se extrae el valor del mismo, se guarda como key en un nuevo diccionario y se contabiliza la cantidad
+    Recorre una lista cuyos elementos son un diccionario con el formato {"parentID": AAA, "childID": NNN}, 
+    luego con el parametro indice = "parentID" se extrae el valor del mismo, se guarda como key en un nuevo diccionario y se contabiliza la cantidad
     de veces que aparece ese key en la lista, el formato de ese nuevo diccionario es {"AAA": X}
 
     Parametros input:
-        - lista: Estructura tipo lista de diccionarios con el formato {"apellido": AAA, "nombre": NNN}
+        - lista: Estructura tipo lista de diccionarios con el formato {"parentID": AAA, "childID": NNN}
         - indice: elemento tipo string, representa el key a buscar en el parametro de entrada "lista"
 
     Parametros output
-        - counts: Estructura tipo lista de diccionarios, con el formato {"AAA": X}
+        - counts: Estructura tipo lista de diccionarios, con el formato {"AAA": X}, donde AAA representa el parentID, y X la cantidad de veces que aparece en el parametro lista 
 
     '''
     counts = {}
@@ -246,9 +245,6 @@ def daylight_autonomy(daIlumValue, dmcNsensors, dmcCondicion, dmcRows, dmcRealHo
         daOcurranceRate - Elemento tipo lista, cada valor indica el porcentaje entre daIlumHoursCount y las horas reales de análisis por cada sensor
         daAverageOcurranceRate - Elemento tipo float con el valor promedio (%) entre daOcurranceRate y la cantidad de sensores
 
-
-        SITIOS DE INTERES
-        https://www.analyticslane.com/2021/08/19/pandas-contabilizar-los-registros-que-cumplen-una-condicion-en-un-dataframe/
     '''
 
     daIlumHoursCount = np.zeros(dmcNsensors)
@@ -413,11 +409,11 @@ def dmc_condicion_and_realHours(dfCondiciones, dmcRows):
     '''
     - CALCULO DE LAS CONDICIONES Y LAS CANTIDADES DE HORAS REALES - 
 
-    Input
+    Parámetros Input
         ocupacion - Elemento tipo lista con la condición de ocupación a tener en cuenta para el analisis de los sensores por cada hora
         periodoAnalisis - Elemento tipo lista con la condición de periodo de analisis a tener en cuenta para el analisis de los sensores por cada hora
         dmcRows - Elemento tipo entero, indica la cantidad de filas (cada fila representa una hora a analizar) que tienen las listas ocupación y periodoAnalisis
-    Output
+    Parámetros Output
         dmcCondicion - Elemento tipo Pandas DataFrame, pero funciona como binario, valores que puede adopotar son 0 ó 1
         dmcRealHours - Elemento tipo entero, indica la cantidad de horas reales a considerar de acuerdo a la ocupacion y periodoAnalisis
     '''
@@ -437,14 +433,14 @@ def get_cdi_index(dmcNsensors, dmcRows, dmcRealHours, dmcCondicion, dfResultados
     Escala de valores de iluminancia: 0lx, 50lx, 100lx, 200lx, 300lx, 500lx, 750lx, 1000lx, 2000lx
 
     Parámetros Input
-    dmcNsensors -  cantida de sensores 
-    dmcRealHours - cantidad de horas a considerar 
-    dmcCondicion - condición de ocupación, y horas a considerar
-    dfResultados - dataFrame con los valores de iluminancia de todos los sensores a analizar
+        dmcNsensors -  cantida de sensores 
+        dmcRealHours - cantidad de horas a considerar 
+        dmcCondicion - condición de ocupación, y horas a considerar
+        dfResultados - dataFrame con los valores de iluminancia de todos los sensores a analizar
 
     Parámetros Output
-    cdiValues - dataframe, valor de máxima iluminancia por sensor, segun escala
-    sCDIvalues - porcentaje de sensores para cada rango de la escala indicada
+        cdiValues - dataframe, valor de máxima iluminancia por sensor, segun escala
+        sCDIvalues - porcentaje de sensores para cada rango de la escala indicada
 
     '''
     cdiMenor50 = np.zeros(dmcNsensors, dtype=float)
@@ -574,7 +570,8 @@ def get_cdi_index(dmcNsensors, dmcRows, dmcRealHours, dmcCondicion, dfResultados
 def creacion_archivos(filePath, nombre, pathResultados, pathSchedule ,daIlumHoursCount, daOcurranceRate, daAverageOcurranceRate, udiIlumHoursCount, udiOcurranceRate, udiAverageOcurranceRate, udiHours, sUDIpercentual,  sUDIsensorCount, sUDIsensorOccurrance, sdaSensorCount, sdaOccurrancePercentSensor, sdaAnualOccurranceRate, sdaHoras, cdi, sCDI, dmcRows, dmcNsensors):
     '''
     - GENERACIÓN DE ARCHIVOS CON LOS DATOS PROCESADOS
-
+        Se generan los archivos "procesados-..." con los datos calculados, en el directorio indicado.
+        
     '''
     dfArchivo = pd.DataFrame()
    
@@ -633,8 +630,14 @@ def creacion_archivos(filePath, nombre, pathResultados, pathSchedule ,daIlumHour
 def crear_archivo_unificado(filesPath, indice, dfUnificado):
     '''
     - GENERACIÓN DE ARCHIVOS CON LOS DATOS UNIFICADOS
-
-    Output
+        Se genera el archivo "unificado" con los datos calculados, en el directorio indicado.
+    
+    Parámetros Input
+        filesPath - Elemento tipo String, indica la ruta a la carpeto donde se guardará el archivo
+        indice - Elemento tipo diccionario, contiene las rutas de los archivos procesados
+        dfUnificado - Elemento tipo Panda dataframe, contiene la información a guardar en el archivo
+        
+    Parámetros Output
         archivo unificado generado en el filePath indicado
 
     '''
@@ -659,14 +662,13 @@ def get_parentID_childID(listaNombreArchivosProcesados, listaNombreArchivosCoord
     '''
     - EXTRACCIÓN DE IDENTIFICADOR DE LOS ARCHIVOS results Y schedule -
 
-    Se genera una lista de los ID de los archivos listados
+    Se genera una lista de los ID de los archivos procesados y de coordenadas de las escenas
 
     Input
-        listaNombreArchivosProcesados - Estructura tipo diccionario {"resultados":[], "schedules":[]} 
+        listaNombreArchivosProcesados - Elemento tipo diccionario {"resultados":[], "schedules":[]} 
         la cual contiene los nombres de los archivos results y schedule a analizar
 
-        listaNombreArchivosCoordenadas - 
-
+        listaNombreArchivosCoordenadas - Elemento tipo 
 
     Output
         listaCompleta - Elemento tipo lista, la cual contiene los identificadores de los archivos a analizar.
@@ -713,6 +715,14 @@ def get_parentID_childID(listaNombreArchivosProcesados, listaNombreArchivosCoord
     return rDict, sDict, sIndex
 
 def get_dataframe_fileNames(fileList):
+    '''
+    EXTRACCIÓN DE LOS IDENTIFICADORES DE LA LISTA DE ARCHIVOS PROCESADOS
+
+    Parámetros Input
+        fileList - Elemento tipo lista. El contenido son los nombres de los archivos procesados
+    Parámetros Output
+        df - Elemento tipo oandas dataframe. El contenido de este dataframe se divide en 3 columnas, "parentID", "resultID", "shceduleID"        
+    '''
 
     underScore = '_'
     parametersList = []
@@ -726,6 +736,19 @@ def get_dataframe_fileNames(fileList):
     return df
 
 def convertir_a_dataframes(filesPath, procesadosFileReference, listaArchivosProcesados, extensionCSV):
+    '''
+    - EXTRACCIÓN DE LOS DATOS DE LAS MÉTRICAS DINÁMICAS
+
+    Parámetros Input
+        filesPath - Elemento tipo String. Indica la ruta de acceso a la carpeta donde se encutran los archivos a leer
+        procesadosFileReference - Elemento tipo String. Nombre de la carpeta donde se encuentran los archivos leer.
+        listaArchivosProcesados - Elemento tipo String. Nombre de archivo procesados que se desea leer.
+        extensionCSV - Elemento tipo String. Indica la extensión de los archivos a leer.
+
+    Parámetros Output
+        df - Elemento tipo Pandas dataframe. Contiene los datos procesados del archivo indicado.
+        
+    '''
 
     with open(filesPath+procesadosFileReference+listaArchivosProcesados+extensionCSV, 'r') as f:
         read_data = f.read()
@@ -737,7 +760,11 @@ def convertir_a_dataframes(filesPath, procesadosFileReference, listaArchivosProc
 
 def generar_carpeta_imagenes(filePath,nombreCarpetaImagen):
     '''
-    Generacíón de carpeta para almacenar las imágenes
+    - GENERACIÓN DE CARPETA PARA ALMACENAR LAS IMÁGNES
+
+    Parámetros Input
+        filePath - Elemento tipo String. Indica la ruta de acceso en donde se quiere almacenar las imágenes
+        nombreCarpetaImagen - Elemento tipo String. Indica el nombre de la carpeta donde se desean almacenar las imágenes      
 
     '''
 
