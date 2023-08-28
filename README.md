@@ -24,7 +24,7 @@ Una vez instalado Python, proceda a intalar las librerías mencionadas anteriorm
 Abra una Terminal y ejecute la siguiente línea:
 
 ```
-$ pip install matplotlib numpy pandas
+pip install matplotlib numpy pandas
 ```
 Si se le consulta confirmación para continuar con la instalación de alguna de las librerías indicadas, favor de indicar que "SI".
 
