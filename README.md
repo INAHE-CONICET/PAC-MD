@@ -34,6 +34,10 @@ Descargue la versión correspondiente para su sistema operativo, ejecute el inst
 
 Ya está listo para correr la aplicación PAC-MD!!!
 
+### Flujo de trabajo
+'''
+'''
+
 
 ### Autores
 
