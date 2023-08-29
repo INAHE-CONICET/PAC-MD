@@ -17,27 +17,87 @@ Las versiones indicadas son las mínimas requeridas, pero se pueden utilizar las
 
 ### Instalación
 
-Para instalar Python dirijase al siguiente link (https://www.python.org/downloads/). Descargue la versión correspondiente para su sistema operativo, ejecute el instalador y siga los pasos indicados.
+Crear la carpeta donde se intalará la herramienta 'pac_md'
 
-Una vez instalado Python, proceda a intalar las librerías mencionadas anteriormente de la siguiente manera:
-
-Abra una Terminal y ejecute la siguiente línea:
+Ingresar a la carpeta
 
 ```
+cd pac_md
+```
+ 
+Crear entorno virtual
+
+```
+python3 -m venv env
+source env/bin/activate
+pip install --upgrade pip
 pip install matplotlib numpy pandas
 ```
-Si se le consulta confirmación para continuar con la instalación de alguna de las librerías indicadas, favor de indicar que "SI".
+
+Clonar carpeta de 'pac_md' desde Github
+
+```
+git clone https://github.com/INAHE-CONICET/PAC-MD.git
+```
+
+o descomprimir el archivo ZIP descargado en la carpeta donde se instaló 'pac_md' y salir.
+
+---
 
 Para instalar Visual Studio Code, dirijase al siguiente link (https://code.visualstudio.com/Download)
 
-Descargue la versión correspondiente para su sistema operativo, ejecute el instalador y siga los pasos indicados.
-
-Ya está listo para correr la aplicación PAC-MD!!!
+---
 
 ### Flujo de trabajo
-'''
-'''
 
+Ingresar a la capeta donde se instaló 'pac_md'
+
+```
+cd pac_md
+```
+
+Activar el entorno virtual
+
+```
+source env/bin/activate
+```
+
+Ingresar a la capeta descargada 'PAC-MD'
+
+```
+cd ./PAC-MD/
+```
+
+En el caso de usuario Windows defina las siguientes carpetas y comente 'OS Mac o Linux' (linea 38-41)
+```
+31 # SO Windows
+32 filesPathData = ".\example\Results\\"
+33 filesPathCoordenadas = ".\example\Workplanes\\"
+34 filesPathProcesados = ".\example\Results\pac_md\\"
+35 filePathsImagen = ".\example\Results\pac_md\\"
+36
+37 # SO Mac or Linux
+38 #filesPathData = "./example/Results/"
+39 #filesPathCoordenadas = "./example/Workplanes/"
+40 #filesPathProcesados = "./example/Results/pac_md/"
+41 #filePathsImagen = "./example/Results/pac_md/"
+42
+43 nombreCarpetaImagen = "./images/"		
+```
+
+En el caso de usuarios OS Mac o Linux, comente 'OS Windows' (32-35)
+
+Ejecutar el post-procesamiento
+
+```
+python3 pac-md.py
+```
+
+Los resultados se encuentran en 
+
+```
+./example/Results/pac_md/
+```
 
 ### Autores
 
