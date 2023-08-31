@@ -29,16 +29,17 @@ import matplotlib.pyplot as plt
 
 # FILES PATHS
 # SO Windows
-filesPathData = ".\\" 
-filesPathCoordenadas = ".\Workplanes\\"
-filesPathProcesados = ".\PAC-MD\\"
-filePathsImagen = ".\PAC-MD\\"
+filesPathData = ".\example\Results\\" 
+filesPathCoordenadas = ".\example\Workplanes\\"
+filesPathProcesados = ".\example\Results\pac_md\\"
+filePathsImagen = ".\example\Results\pac_md\\"
+
  
 # SO Mac or Linux
-#filesPathData = "./"
-#filesPathCoordenadas = "./Workplanes/"
-#filesPathProcesados = "./PAC-MD/"
-#filePathsImagen = "./PAC-MD/images/"
+#filesPathData = "./example/Results/"
+#filesPathCoordenadas = "./example/Workplanes/"
+#filesPathProcesados = "./example/Results/pac_md/"
+#filePathsImagen = "./example/Results/pac_md/"
 
 nombreCarpetaImagen = "images\\"
 
@@ -563,11 +564,13 @@ def get_cdi_index(dmcNsensors, dmcRows, dmcRealHours, dmcCondicion, dfResultados
     for k in sCDIvalues:
         sCDIvalues[k] = sCDIvalues[k]*100/dmcNsensors 
     
+    cdiMaxValue = cdiValues.max()
+
     print(f"Valores de sCDI normalizados: < 50lx: {sCDIvalues['0lx']:.2f} >= 50lx: {sCDIvalues['50lx']:.2f}, >= 100lx: {sCDIvalues['100lx']:.2f}, >= 200lx: {sCDIvalues['200lx']:.2f}, >= 300lx: {sCDIvalues['300lx']:.2f}, >= 500lx: {sCDIvalues['500lx']:.2f}, >= 750lx: {sCDIvalues['750lx']:.2f}, >= 1000lx: {sCDIvalues['1000lx']:.2f}, >= 2000lx: {sCDIvalues['2000lx']:.2f}\n")
     
-    return cdiValues, sCDIvalues
+    return cdiValues, sCDIvalues, cdiMaxValue
 
-def creacion_archivos(filePath, nombre, pathResultados, pathSchedule ,daIlumHoursCount, daOcurranceRate, daAverageOcurranceRate, udiIlumHoursCount, udiOcurranceRate, udiAverageOcurranceRate, udiHours, sUDIpercentual,  sUDIsensorCount, sUDIsensorOccurrance, sdaSensorCount, sdaOccurrancePercentSensor, sdaAnualOccurranceRate, sdaHoras, cdi, sCDI, dmcRows, dmcNsensors):
+def creacion_archivos(filePath, nombre, pathResultados, pathSchedule ,daIlumHoursCount, daOcurranceRate, daAverageOcurranceRate, udiIlumHoursCount, udiOcurranceRate, udiAverageOcurranceRate, udiHours, sUDIpercentual,  sUDIsensorCount, sUDIsensorOccurrance, sdaSensorCount, sdaOccurrancePercentSensor, sdaAnualOccurranceRate, sdaHoras, cdi, sCDI, cdiValue, dmcRows, dmcNsensors):
     '''
     - GENERACIÓN DE ARCHIVOS CON LOS DATOS PROCESADOS
         Se generan los archivos "procesados-..." con los datos calculados, en el directorio indicado.
@@ -619,6 +622,7 @@ def creacion_archivos(filePath, nombre, pathResultados, pathSchedule ,daIlumHour
         f.write(f"UDI - Horas de cumplimiento de [{udiIlumMin} - {udiIlumMax} lx]: {udiHours}\n")
         f.write(f"sUDI: {sUDIpercentual:.2f}\n")  
         f.write(f"sUDI - Horas con cumplimiento del {(sudiPorcentajeHoras*100)} %: {int(sUDIhs)}\n")
+        f.write(f"CDI: {cdiValue}\n")
         for k in sCDI:
             f.write(f"sCDI - {k}: {sCDI[k]:.2f} \n")     
         f.write("\n")
@@ -859,6 +863,7 @@ da_value = []
 udi_value = []
 sUDI_value = []
 sDA_value = []
+cdi_value = []
 sCDI_0lx = []
 sCDI_50lx = []
 sCDI_100lx = []
@@ -910,17 +915,18 @@ for element in resultsDict:
         print(f"UDI - Limite inferior [lx]: {udiIlumMin}, Limite superior [lx]: {udiIlumMax}")
         udiIlumHoursCount, udiOcurranceRate, udiAverageRate, udiHours, sUDIpercentual, sUDIhs, sUDIsensorCount, sUDIsensorOccurrance = useful_daylight_index(udiIlumMin, udiIlumMax, dmcNsensors, dmcRealHours, dmcRows, dfResultados)
         
-        cdi, sCDI = get_cdi_index(dmcNsensors, dmcRows, dmcRealHours, dmcCondicion, dfResultados)
+        cdi, sCDI, cdiValue = get_cdi_index(dmcNsensors, dmcRows, dmcRealHours, dmcCondicion, dfResultados)
 
         print("\nMETRICAS DINÁMICAS DE ILUMINACIÓN NATURAL\n")
         print(f"DA: {daAverageRate:.2f}")
         print(f"sDA: {sdaAnualRate:.2f}\n")
         print(f"UDI: {udiAverageRate:.2f}")        
         print(f"sUDI: {sUDIpercentual:.2f}\n")
+        print(f"CDI: {cdiValue}\n")
         for k in sCDI:
             print(f"sCDI-{k}: {sCDI[k]:.2f}")
 
-        a = creacion_archivos(filesPathProcesados, element["parentID"]+"_"+element["childID"]+"_"+schedulesIndex[element["parentID"]][elemento], filesPathData+"results_"+element["parentID"]+"_"+element["childID"], filesPathData+"schedules_"+schedulesIndex[element["parentID"]][elemento],daIlumHoursCount, daOcurranceRate, daAverageRate, udiIlumHoursCount, udiOcurranceRate, udiAverageRate, udiHours, sUDIpercentual, sUDIsensorCount, sUDIsensorOccurrance, sdaIlumSensorCount, sdaOccurrancePercentSensor, sdaAnualRate, sdaHoras, cdi, sCDI, dmcRows, dmcNsensors)
+        a = creacion_archivos(filesPathProcesados, element["parentID"]+"_"+element["childID"]+"_"+schedulesIndex[element["parentID"]][elemento], filesPathData+"results_"+element["parentID"]+"_"+element["childID"], filesPathData+"schedules_"+schedulesIndex[element["parentID"]][elemento],daIlumHoursCount, daOcurranceRate, daAverageRate, udiIlumHoursCount, udiOcurranceRate, udiAverageRate, udiHours, sUDIpercentual, sUDIsensorCount, sUDIsensorOccurrance, sdaIlumSensorCount, sdaOccurrancePercentSensor, sdaAnualRate, sdaHoras, cdi, sCDI, cdiValue, dmcRows, dmcNsensors)
         
         parentID.append(element["parentID"])
         scheduleID.append(schedulesIndex[element["parentID"]][elemento])
@@ -942,6 +948,7 @@ for element in resultsDict:
         udi_value.append(udiAverageRate)
         sUDI_value.append(sUDIpercentual)
         sDA_value.append(sdaAnualRate)
+        cdi_value.append(cdiValue)
         sCDI_0lx.append(sCDI['0lx'])
         sCDI_50lx.append(sCDI['50lx'])
         sCDI_100lx.append(sCDI['100lx'])
@@ -971,6 +978,7 @@ resultados = {
                 "sDA": sDA_value,
                 "UDI": udi_value,
                 "sUDI": sUDI_value,
+                "CDI": cdi_value,
                 "sCDI-0lx": sCDI_0lx,
                 "sCDI-50lx": sCDI_50lx,
                 "sCDI-100lx": sCDI_100lx,
