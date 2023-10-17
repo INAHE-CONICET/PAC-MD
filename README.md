@@ -1,7 +1,7 @@
-## PAC-MD v1.0 ![Badge en Desarollo](https://img.shields.io/badge/VERSION-1.0%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-beta_estable%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-mpl2.0%20-red) 
+## PAC-MD ![Badge en Desarollo](https://img.shields.io/badge/VERSION-1.0%20-yellow) ![Badge en Desarollo](https://img.shields.io/badge/ESTADO-beta_estable%20-green) ![Badge en Desarollo](https://img.shields.io/badge/LICENCIA-mpl2.0%20-red) 
 
 
-_PAC-MD es una herramienta de post-procesamiento de archivos de salida de simulaciones dinámicas obtenidas en motores de cálculos avanzados de luz natural (Radiance). Las métricas dinámicas incorporadas a esta herramienta son: DA, sDA, UDI, sUDI y sCDI._
+_PAC-MD es una herramienta de post-procesamiento de archivos de salida de simulaciones dinámicas obtenidas en motores de cálculos avanzados de luz natural (Radiance). Las métricas dinámicas incorporadas a esta herramienta son: DA, sDA, UDI, sUDI, CDI y sCDI._
 
 ### Requisitos
 
