@@ -24,6 +24,7 @@ from io import StringIO
 import matplotlib
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import configparser
 
 ######  CONFIG PARAMETERS OF DYNAMIC METRICS   ######
 
@@ -789,11 +790,56 @@ def generar_carpeta_imagenes(filePath,nombreCarpetaImagen):
 
     return 1
 
+def read_cnf_file(config_file_path):
+    '''
+    Read the configuration file and set de variables 
+
+    '''
+    config = configparser.ConfigParser()
+    config.read(config_file_path)
+
+    print(config.sections())
+
+    filesPathData = config['PATHS']['home_dir']
+    filesPathCoordenadas = config['PATHS']['coordenates_files']
+    filesPathProcesados = config['PATHS']['processed_files']
+    filePathsImagen = config['PATHS']['images_files']
+
+    resultsFileReference = config['HEADERS']['results_header']
+    scheduleFileReference = config['HEADERS']['schedule_header']
+    procesadosFileReference = config['HEADERS']['processed_header']
+    wpFileHeader = config['HEADERS']['workplanes_header']
+    extensionCSV = config['HEADERS']['csv_extention']
+    extensionPTS = config['HEADERS']['pts_extention']
+
+    valorAlpha = config['GRAPHICS']['alpha_value']
+    markerSize = config['GRAPHICS']['marker_size']
+
+    daIlumValue = config['DA']['ilumination_value']
+
+    sdaIlumValue = config['sDA']['ilumination_value']
+    sdaPorcentajeSensores = config['sDA']['sensor_percent']
+    sdaPorcentajeHoras = config['sDA']['hours_percent']
+
+    udiIlumMin = config['UDI']['ilumination_min_value']
+    udiIlumMax = config['UDI']['ilumination_min_value']
+    udiPorcentajeSensores = 0.5 # fraction of sensor to consider for analysis
+
+    sudiIlumMin = config['sUDI']['ilumination_min_value']
+    sudiIlumMax = config['sUDI']['ilumination_min_value']
+    sudiPorcentajeHoras = config['sUDI']['hours_percent']
+
+    cdiPorcentajeSensores = config['CDI']['sensor_percent']
+    scdiPorcentajeSensores = config['sCDI']['sensor_percent']
+
+    return 1
+
 
 ''' - INICIO PROGRAMA PRINCIPAL - '''
 print("#########   CALCULATION OF DYNAMIC METRICS    ######### \n")
 startTime = datetime.now()
-extensionCSV = ".csv"
+read_cnf_file('pac_md_config.cnf')
+#extensionCSV = ".csv"
 listarArchivos = {"resultados":[], "schedules":[]}
 
 listarArchivos["resultados"] = listar_archivos(filesPathData, "results_", extensionCSV)
