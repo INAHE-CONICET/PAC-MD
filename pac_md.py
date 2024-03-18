@@ -64,7 +64,8 @@ markerSize = 15
 Porcentaje anual de los intervalos de tiempo ocupados cuando la iluminancia excede
 un umbral predefinido (por defecto 200 lux)
 '''
-daIlumValue = 200 # DA threshold value 
+daIlumValue = [] # DA threshold value 
+ilumValueAux = []
 
 # sDA - SPATIAL DAYLIGHT AUTONOMY
 '''
@@ -790,12 +791,13 @@ def generar_carpeta_imagenes(filePath,nombreCarpetaImagen):
 
     return 1
 
-def read_cnf_file(config_file_path):
+def read_config_file(config_file_path):
     '''
     Read the configuration file and set de variables 
 
     '''
     config = configparser.ConfigParser()
+    config = configparser.ConfigParser(converters={'list': lambda x: [i.strip() for i in x.split(',')]})
     config.read(config_file_path)
 
     print(config.sections())
@@ -815,7 +817,14 @@ def read_cnf_file(config_file_path):
     valorAlpha = config['GRAPHICS']['alpha_value']
     markerSize = config['GRAPHICS']['marker_size']
 
-    daIlumValue = config['DA']['ilumination_value']
+    #daIlumValue = config['DA']['ilumination_value']
+    ilumValueAux = config.getlist('DA', 'ilumination_value')
+    ilumValueAux = [int(i) for i in ilumValueAux]
+    
+    for i in ilumValueAux:
+        daIlumValue.append(i)
+    
+    print(daIlumValue)
 
     sdaIlumValue = config['sDA']['ilumination_value']
     sdaPorcentajeSensores = config['sDA']['sensor_percent']
@@ -838,7 +847,14 @@ def read_cnf_file(config_file_path):
 ''' - INICIO PROGRAMA PRINCIPAL - '''
 print("#########   CALCULATION OF DYNAMIC METRICS    ######### \n")
 startTime = datetime.now()
-read_cnf_file('pac_md_config.cnf')
+try:
+    read_config_file('pac_md_config.cfg')
+    print("Config file OK")
+except:
+    print("Error on configuration file")
+    exit(0)
+
+print(daIlumValue)
 #extensionCSV = ".csv"
 listarArchivos = {"resultados":[], "schedules":[]}
 
@@ -873,7 +889,7 @@ else:
 
 #   Generamos mensajes de error si hubieran
 if flagIntegrityCheck != 0:
-    print("HA OCURRIDO UN ERROR")
+    print("SOMETHING WENT WRONG !!!")
     if flagIntegrityCheck == 1:
         print("ATENCIÓN: NO SE CUMPLE LA CONDICIÓN DE IGUALDAD EN LOS IDENTIFICADORES USADOS PARA RESULTADOS Y SCHEDULES")
         print("Favor de revisar los identidicadores usados para los rchivos de resultados y los schedules sean no sean diferentes.")
@@ -963,7 +979,26 @@ for element in resultsDict:
         print(f"DA - Iluminancia límite [lx]: {daIlumValue}")
         print(f"sDA - Iluminancia límite [lx]: {sdaIlumValue}, Porcentaje de tiempo considerado: {(sdaPorcentajeSensores*100)} % [default 50 %]")
 
-        daIlumHoursCount, daOcurranceRate, daAverageRate = daylight_autonomy(daIlumValue, dmcNsensors, dmcCondicion, dmcRows, dmcRealHours, dfResultados)
+        '''daIlumHoursCount = [] * len(daIlumValue)
+        daOcurranceRate = [] * len(daIlumValue)
+        daAverageRate = [] * len(daIlumValue)   '''
+
+        daIlumHoursCount = [] #daIlumValue
+        daOcurranceRate = [] #daIlumValue
+        daAverageRate = [] #daIlumValue     
+
+        print(f"La cantidad de elementos son {len(daIlumValue)} y los valores son {daIlumValue}") 
+
+        n = len(daIlumValue)
+
+        for e in range(0,n):#len(daIlumValue)):
+            print(f"El valor de daIlumValue es {daIlumValue[e]}")
+            daIlumHoursCount[e], daOcurranceRate[e], daAverageRate[e] = daylight_autonomy(daIlumValue[e], dmcNsensors, dmcCondicion, dmcRows, dmcRealHours, dfResultados)        
+        
+        print(daIlumHoursCount)
+        print(daOcurranceRate)
+        print(daAverageRate)
+        
         sdaIlumSensorCount, sdaOccurrancePercentSensor, sdaAnualRate, sdaHoras = spatial_daylight_autonomy(sdaIlumValue, dmcNsensors, dmcRealHours, dmcCondicion, dfResultados)
 
         print(f"UDI - Limite inferior [lx]: {udiIlumMin}, Limite superior [lx]: {udiIlumMax}")
