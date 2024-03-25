@@ -90,7 +90,7 @@ En el caso de usuarios OS Mac o Linux, comente 'OS Windows' (32-35)
 Ejecutar el post-procesamiento
 
 ```
-python3 pac-md.py
+python3 pac_md.py
 ```
 
 A los resultados se puede acceder desde:
