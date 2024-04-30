@@ -107,7 +107,7 @@ A los resultados se puede acceder desde:
 
 ### Financiamiento
 
-Esta investigación fue apoyada por el Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET, Argentina) - **PIBAA 2872021010-0031CO** y la Agencia Nacional de Investigaciones Científicas y Tecnológicas Promoción (ANPCyT, Argentina) - **PICT 2019-04356**. La fuente de financiación no participó en el diseño de este estudio; en la recopilación, análisis e interpretación de datos; en la redacción del informe; o en la decisión de someter 
+Esta investigación fue apoyada por el Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET, Argentina) - **PIBAA 2872021010-0031CO** y la Agencia Nacional de Investigaciones Científicas y Tecnológicas Promoción (ANPCyT, Argentina) - **PICT 2019-04356**. La fuente de financiación no participó en el diseño de este desarrollo; en la codificación, análisis e interpretación de datos; o decisión alguna.
 
 ### Citación
 
