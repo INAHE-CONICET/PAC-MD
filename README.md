@@ -111,7 +111,7 @@ Esta investigación fue apoyada por el Consejo Nacional de Investigaciones Cient
 
 ### Citación
 
-Monteoliva, J.M, Schumacher, E.R. (2023, 7 de septiembre)_. Herramienta de código abierto para el pos-procesamiento de métricas dinámicas y visualización de resultados a partir de datos originales de simulaciones anuales_ [Congreso]. LUZ 2023 - XVI Jornadas Argentinas de Luminotecnia, Santiago del Estero, Argentina.
+[Monteoliva, J.M, Schumacher, E.R. (2023, 7 de septiembre)_. Herramienta de código abierto para el pos-procesamiento de métricas dinámicas y visualización de resultados a partir de datos originales de simulaciones anuales_ [Congreso]. LUZ 2023 - XVI Jornadas Argentinas de Luminotecnia, Santiago del Estero, Argentina.](https://zenodo.org/records/10465752)
 
 ### Licencia
 
